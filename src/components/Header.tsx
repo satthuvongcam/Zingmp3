@@ -8,7 +8,7 @@ const { BsArrowLeft, BsArrowRight, CiSettings } = icons
 
 const Header = () => {
   return (
-    <div className='flex items-center justify-center w-full'>
+    <div className='flex items-center justify-center w-full px-[59px]'>
       <div className='flex gap-6 w-full items-center'>
         <div className='flex gap-6 text-gray-400'>
           <span>

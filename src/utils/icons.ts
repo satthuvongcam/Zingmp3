@@ -5,6 +5,7 @@ import libraryIcon from "~/assets/images/icons/libraryIcon"
 import { AiOutlineSearch } from "react-icons/ai"
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
+import { IoTrendingUpSharp } from "react-icons/io5";
 
 const icons = {
   discoverIcon,
@@ -14,7 +15,8 @@ const icons = {
   AiOutlineSearch,
   BsArrowLeft,
   BsArrowRight,
-  CiSettings
+  CiSettings,
+  IoTrendingUpSharp
 }
 
 export default icons

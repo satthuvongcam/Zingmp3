@@ -7,7 +7,7 @@ const Sidebar = () => {
   const nav = useNavigate()
 
   return (
-    <div className='flex flex-col bg-[#DDE4E4]'>
+    <div className='flex flex-col bg-[#DDE4E4] h-full'>
       <div
         onClick={() => {
           nav('')
