@@ -2,6 +2,9 @@ import React from 'react'
 import logo from '~/assets/images/logo-light.svg'
 import { sidebarMenu } from '~/utils/menu'
 import { NavLink, useNavigate } from 'react-router-dom'
+import icons from '~/utils/icons'
+
+const { IoPlayCircleOutline } = icons
 
 const Sidebar = () => {
   const nav = useNavigate()
@@ -22,14 +25,20 @@ const Sidebar = () => {
             to={item.path}
             key={index.toString()}
             end={item.end}
+            title={item.title}
             className={({ isActive }) =>
               isActive
-                ? 'py-3 px-[21px] font-semibold text-[14px] text-[#0F7070] flex items-center gap-3 bg-[#e7ecec] border-l-[2px] border-l-[#0F7070]'
-                : 'py-3 px-[21px] font-semibold text-[14px] text-[#32323D] flex items-center gap-3'
+                ? 'py-3 px-[21px] relative text-[14px] text-[#0F7070] bg-[#e7ecec] border-l-[2px] border-l-[#0F7070]'
+                : 'py-3 px-[21px] relative text-[14px] text-[#32323D]'
             }
           >
-            <item.icon />
-            <span>{item.title}</span>
+            <div className='flex items-center gap-3 font-semibold group hover:text-[#0F7070]'>
+              <item.icon />
+              <span>{item.title}</span>
+              <span className='absolute right-[30px] invisible group-hover:visible'>
+                <IoPlayCircleOutline size={20} />
+              </span>
+            </div>
           </NavLink>
         ))}
       </div>

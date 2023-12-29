@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { HomeAPI } from '~/apis'
+import { homeApi } from '~/apis'
 import Slider from '~/components/Slider'
 import { useAppSelector, useAppDispatch } from '~/redux/hooks'
-import { getHome, selectHome, selectBanner, getBanner } from '~/redux/slices/homeSlice'
+import { getHome, getBanner } from '~/redux/slices/homeSlice'
 import { ItemHome } from '~/models/homeInterfaces'
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await HomeAPI.getHome()
+        const response = await homeApi.getHome()
         const data = response.data.data.items
         const dataBanner = data.find((item: ItemHome) => item.sectionType === 'banner')
         dispatch(getHome(data))
@@ -25,8 +25,9 @@ const Home = () => {
   }, [])
 
   return (
-    <div className='w-full px-[59px] bg-[#CED9D9]'>
+    <div className='w-full bg-[#CED9D9]'>
       <Slider />
+      {Array.from({length: 30}).map((item, i) => <div key={i}>HI</div>)}
     </div>
   )
 }

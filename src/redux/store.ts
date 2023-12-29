@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import homeReducer from '~/redux/slices/homeSlice'
+import musicReducer from '~/redux/slices/musicSlice'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import logger from 'redux-logger'
@@ -9,7 +10,8 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  home: homeReducer
+  home: homeReducer,
+  music: musicReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
