@@ -2,7 +2,7 @@ import discoverIcon from '~/assets/images/icons/discoverIcon'
 import zingChartIcon from '~/assets/images/icons/zingChartIcon'
 import radioIcon from '~/assets/images/icons/radioIcon'
 import libraryIcon from '~/assets/images/icons/libraryIcon'
-import { AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineSearch, AiOutlineUserAdd  } from 'react-icons/ai'
 import {
   BsArrowLeft,
   BsArrowRight,
@@ -11,15 +11,20 @@ import {
   BsMusicNoteBeamed
 } from 'react-icons/bs'
 import { CiSettings, CiShuffle } from 'react-icons/ci'
+import { FaSort } from "react-icons/fa";
 import { FaRegHeart } from 'react-icons/fa6'
 import { MdSkipPrevious, MdSkipNext } from 'react-icons/md'
+import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { IoMdHeartEmpty } from "react-icons/io";
 import {
   IoTrendingUpSharp,
   IoRepeat,
   IoPlayCircleOutline,
-  IoPauseCircleOutline
+  IoPauseCircleOutline,
+  IoPlay,
+  IoPauseOutline 
 } from 'react-icons/io5'
-import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 
 const icons = {
   discoverIcon,
@@ -27,6 +32,7 @@ const icons = {
   radioIcon,
   libraryIcon,
   AiOutlineSearch,
+  AiOutlineUserAdd,
   BsArrowLeft,
   BsArrowRight,
   BsThreeDotsVertical,
@@ -34,15 +40,20 @@ const icons = {
   BsMusicNoteBeamed,
   CiSettings,
   CiShuffle,
+  FaSort,
   FaRegHeart,
   MdSkipPrevious,
   MdSkipNext,
+  GoChevronLeft,
+  GoChevronRight,
+  HiOutlineDotsHorizontal,
+  IoMdHeartEmpty,
   IoTrendingUpSharp,
   IoRepeat,
   IoPlayCircleOutline,
   IoPauseCircleOutline,
-  GoChevronLeft,
-  GoChevronRight
+  IoPlay,
+  IoPauseOutline
 }
 
 export default icons

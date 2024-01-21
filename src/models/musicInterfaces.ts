@@ -25,8 +25,8 @@ export interface Artists {
   link: string
   thumbnail: string
   thumbnailM: string
-  playlistId: string
-  // totalFollow: boolean;
+  playlistId: string | null
+  totalFollow: number | null;
 }
 
 export interface Artist {
@@ -56,6 +56,7 @@ export interface ListItemSong {
   album: Album
   total: number
   totalDuration: number
+  releaseDate: number
 }
 
 export interface Album {

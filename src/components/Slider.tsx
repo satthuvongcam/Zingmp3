@@ -5,7 +5,7 @@ import { selectBanner } from '~/redux/slices/homeSlice'
 import { getArrSlider, handleShowImgBanner } from '~/utils/functions'
 import icons from '~/utils/icons'
 import { ItemBanner } from '~/models/homeInterfaces'
-import { setCurrentSongId, setPlay } from '~/redux/slices/musicSlice'
+import { setIsAlbum, setCurrentSongId, setPlay } from '~/redux/slices/musicSlice'
 import { useNavigate } from 'react-router-dom'
 
 const { GoChevronLeft, GoChevronRight } = icons
@@ -15,16 +15,14 @@ const Slider = () => {
   const [count, setCount] = useState<number>(0)
   const [elementBannerShow, setElementBannerShow] = useState<number[]>([0, 1, 2])
 
-  // console.log('elementBannerShow: ', elementBannerShow)
-
   const banner = useAppSelector(selectBanner)
   const dispatch = useAppDispatch()
   const nav = useNavigate()
 
   useEffect(() => {
     const sliderEls = document.getElementsByClassName('slider-item')
-    let min = 1
-    let max = 3
+    let min = 0
+    let max = 2
     const IntervalId = setInterval(() => {
       const list = getArrSlider(min, max, sliderEls.length - 1)
       handleShowImgBanner(list, sliderEls, min, max, false)
@@ -82,9 +80,12 @@ const Slider = () => {
     if (item?.type === 1) {
       dispatch(setCurrentSongId(item.encodeId))
       dispatch(setPlay(true))
+      dispatch(setIsAlbum(false))
     } else if (item?.type === 4) {
       const albumPath = item?.link?.split('.')[0]
       nav(albumPath)
+    } else {
+      dispatch(setIsAlbum(false))
     }
   }
 
