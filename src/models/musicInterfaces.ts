@@ -26,7 +26,7 @@ export interface Artists {
   thumbnail: string
   thumbnailM: string
   playlistId: string | null
-  totalFollow: number | null;
+  totalFollow: number | null
 }
 
 export interface Artist {
@@ -34,7 +34,6 @@ export interface Artist {
   name: string
   link: string
   playlistId: string
-  cover: string
   thumbnail: string
 }
 
@@ -49,6 +48,7 @@ export interface ListItemSong {
   title: string
   artistsNames: string
   artists: Artists[]
+  isWorldWide: boolean
   thumbnailM: string
   link: string
   thumbnail: string
@@ -65,5 +65,11 @@ export interface Album {
   thumbnail: string
   link: string
   artists: Artists[]
-  artistsNames: string;
+  artistsNames: string
+}
+
+export interface ListSongRelease {
+  all: ListItemSong[]
+  vPop: ListItemSong[]
+  others: ListItemSong[]
 }

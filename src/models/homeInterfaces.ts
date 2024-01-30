@@ -1,4 +1,6 @@
-export interface ItemBanner {
+import { Artists } from './musicInterfaces'
+
+export interface ItemHome {
   type: number
   link: string
   banner: string
@@ -10,11 +12,26 @@ export interface ItemBanner {
   encodeId: string
 }
 
-export interface ItemHome {
-  sectionType: string;
-  viewType: string;
-  title: string;
-  link: string;
-  sectionId: string;
-  items: ItemBanner[]; 
+export interface ListItemHome {
+  sectionType: string
+  viewType: string
+  title: string
+  link: string
+  sectionId: string
+  items: ItemHome[]
+}
+
+export interface ItemData {
+  encodeId: string
+  title: string
+  artistsNames: string
+  artists: Artists[]
+  thumbnailM: string
+  link: string
+  thumbnail: string
+}
+
+export interface Data {
+  items: ItemData[]
+  title: string
 }

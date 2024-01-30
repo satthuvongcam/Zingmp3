@@ -1,4 +1,3 @@
-import React from 'react'
 import icons from '~/utils/icons'
 import Search from './Search'
 import { Tooltip, Avatar } from 'flowbite-react'

@@ -1,4 +1,3 @@
-import React from 'react'
 import logo from '~/assets/images/logo-light.svg'
 import { sidebarMenu } from '~/utils/menu'
 import { NavLink, useNavigate } from 'react-router-dom'

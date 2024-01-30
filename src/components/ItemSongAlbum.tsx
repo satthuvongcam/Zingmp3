@@ -13,6 +13,7 @@ import {
 } from '~/redux/slices/musicSlice'
 import { CustomFlowbiteTheme, Flowbite, Tooltip } from 'flowbite-react'
 import ArtistToolTip from './ArtistToolTip'
+import BgImage from './BgImage'
 
 const { BsMusicNoteBeamed, IoPlay } = icons
 
@@ -36,10 +37,6 @@ const ItemSongAlbum: React.FC<Props> = ({ songData }) => {
   const isPlaying = useAppSelector(selectIsPlaying)
   const currentSongId = useAppSelector(selectCurrentSong)
   const [playlistIdHover, setPlaylistIdHover] = useState<string>('')
-  const itemImageRef = useRef<HTMLSpanElement>(null)
-  const itemPlayRef = useRef<HTMLSpanElement>(null)
-
-  console.log('playlistIdHover: ', playlistIdHover)
 
   return (
     <div
@@ -64,70 +61,19 @@ const ItemSongAlbum: React.FC<Props> = ({ songData }) => {
             className='flex items-center outline-none border-[rgba(50, 50, 61, 0.5)] w-full h-full font-bold rounded-[3px]'
           />
         </span>
-        <div className='w-10 h-10 relative'>
-          <div
-            className={`${
-              currentSongId === songData?.encodeId ? 'visible' : 'invisible'
-            } group-hover:visible rounded-md z-[1] w-full h-full absolute top-0 left-0 bg-[rgba(0,0,0,0.5)]`}
-          ></div>
-          <img
-            src={songData?.thumbnail}
-            alt='img song'
-            className='w-10 h-10 object-cover rounded-md cursor-pointer'
+        <div className='w-9 h-9 relative overflow-hidden rounded-md'>
+          <BgImage
+            Data={songData}
+            Icon={IoPlay}
+            Style={{ rounded: 'rounded-md', width: 6, height: 6, iconSize: 16, isCircle: false }}
           />
-          <span
-            onClick={() => {
-              if (currentSongId !== songData?.encodeId) {
-                dispatch(setCurrentSongId(songData?.encodeId))
-                dispatch(setPlay(true))
-                dispatch(setIsAlbum(true))
-                itemImageRef.current?.classList.add(
-                  `bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif')]`
-                )
-                itemImageRef.current?.classList.add('visible')
-              } else if (isPlaying === false) {
-                dispatch(setPlay(true))
-                dispatch(setIsAlbum(true))
-                itemImageRef.current?.classList.add(
-                  `bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif')]`
-                )
-                itemImageRef.current?.classList.add('visible')
-                itemPlayRef.current?.classList.add('hidden')
-              } else {
-                dispatch(setPlay(false))
-                itemImageRef.current?.classList.remove(
-                  `bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif')]`
-                )
-                itemPlayRef.current?.classList.remove('hidden')
-                itemPlayRef.current?.classList.add('block')
-              }
-            }}
-            ref={itemImageRef}
-            className={`${
-              currentSongId == songData?.encodeId && isPlaying
-                ? `visible bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif')]`
-                : currentSongId == songData?.encodeId && isPlaying === false
-                ? 'visible'
-                : 'invisible'
-            } group-hover:visible cursor-pointer z-[2] absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-white hover:opacity-0.8`}
-          >
-            {currentSongId == songData?.encodeId && isPlaying ? (
-              <span ref={itemPlayRef} className='hidden'>
-                <IoPlay size={18} />
-              </span>
-            ) : (
-              <span ref={itemPlayRef} className='block'>
-                <IoPlay size={18} />
-              </span>
-            )}
-          </span>
         </div>
-        <span className='flex flex-col flex-1'>
-          <span className='text-sm font-medium text-[#32323D]'>{songData?.title}</span>
-          <div className='flex gap-1'>
+        <div className='flex flex-col flex-1 w-[100px] pr-5'>
+          <div className='text-sm font-medium text-[#32323D] text-ellipsis overflow-hidden whitespace-nowrap'>
+            {songData?.title}
+          </div>
+          <div className='text-ellipsis overflow-hidden whitespace-nowrap'>
             {songData?.artists?.map((item, index) => {
-              console.log('item: ', item)
-
               return (
                 // <Flowbite theme={{ theme: customTooltip }}>
                 //   <Tooltip
@@ -138,29 +84,31 @@ const ItemSongAlbum: React.FC<Props> = ({ songData }) => {
                 //   style='light'
                 //   content={<ArtistToolTip playlistId={playlistIdHover} artist={item} />}
                 // >
-                  <span
-                    key={item.id}
-                    onMouseEnter={() => {
-                      if (item?.playlistId) {
-                        setPlaylistIdHover(item?.playlistId)
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      setPlaylistIdHover('')
-                    }}
-                    className='hover:cursor-pointer hover:underline relative hover:text-[#0f7070]'
-                  >
-                    {index === songData?.artists?.length - 1 ? item?.name : `${item?.name},`}
-                  </span>
-                // </Tooltip>
+                <span
+                  key={item.id}
+                  onMouseEnter={() => {
+                    if (item?.playlistId) {
+                      setPlaylistIdHover(item?.playlistId)
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    setPlaylistIdHover('')
+                  }}
+                  className='hover:cursor-pointer hover:underline relative hover:text-[#0f7070] mr-1'
+                >
+                  {index === songData?.artists?.length - 1 ? item?.name : `${item?.name},`}
+                </span>
+                //  </Tooltip>
                 //   </Tooltip>
                 // </Flowbite>
               )
             })}
           </div>
-        </span>
+        </div>
       </div>
-      <div className='flex w-[30%] items-center justify-start'>{songData?.album?.title}</div>
+      <div className='w-[30%] text-ellipsis overflow-hidden whitespace-nowrap'>
+        {songData?.album?.title}
+      </div>
       <div className='flex flex-1 justify-end'>
         {dayjs.unix(songData?.duration).format('mm:ss')}
       </div>

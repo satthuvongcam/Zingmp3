@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState, useRef, UIEvent } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { NavLink } from 'react-router-dom'
 import icons from '~/utils/icons'
 
@@ -87,7 +87,7 @@ const Search = () => {
             : 'shadow-none'
         }`}
         onClick={(e) => {
-          console.log(e);
+          console.log(e)
           setIsOpenDropdown(!isOpenDropdown)
         }}
         onBlur={() => setIsOpenDropdown(false)}
@@ -113,7 +113,7 @@ const Search = () => {
             isOpenDropdown ? 'block' : 'hidden'
           } w-full h-auto overflow-hidden bg-[#DDE4E4] z-[5] absolute top-10 rounded-b-[20px] shadow-[0_4px_6px_0_rgba(32,33,36,.28)] py-[13px] px-[10px] text-[#32323d]`}
         >
-          <div className='overflow-y-auto calc-400' ref={currentLocation} onScroll={handleScroll}>
+          <div className='overflow-y-auto calc-500' ref={currentLocation} onScroll={handleScroll}>
             <div className='text-[14px] font-bold px-[10px] pb-2 flex justify-between'>
               Đề xuất cho bạn
             </div>

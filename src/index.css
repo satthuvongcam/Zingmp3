@@ -3,8 +3,14 @@
 @tailwind utilities;
 
 @layer utilities {
-  .calc-400 {
+  .calc-500 {
     max-height: calc(100vh - 500px);
+  }
+  .calc-90 {
+    max-height: calc(100vh - 500px);
+  }
+  .height-90 {
+    height: calc(100vh - 500px);
   }
 }
 
@@ -18,7 +24,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: #ced9d9;
 }
 
 @keyframes skeleton {
@@ -46,4 +52,7 @@
   background-size: 200% auto;
   background-repeat: no-repeat;
   background-position-x: -50%;
+}
+
+.custom-range {
 }

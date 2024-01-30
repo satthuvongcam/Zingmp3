@@ -1,6 +1,4 @@
-import React from 'react'
-
-const CardItem = () => {
+const CardItemSkeleton = () => {
   return (
     <>
       <div>
@@ -11,6 +9,6 @@ const CardItem = () => {
       </div>
     </>
   )
-}
+} 
 
-export default CardItem
+export default CardItemSkeleton

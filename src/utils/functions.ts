@@ -37,7 +37,6 @@ export const handleShowImgBanner = (
     }
   }
 
-  // console.log('min max', {min, max});
   // Add animation by adding classnames
   arrShow.forEach((item) => {
     if (isPrev === false) {
@@ -56,6 +55,6 @@ export const handleShowImgBanner = (
       } else {
         arrElement[item]?.classList?.add('animate-slide-right2', 'order-2', 'z-20')
       }
-    } 
+    }
   })
 }

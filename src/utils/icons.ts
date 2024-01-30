@@ -8,12 +8,14 @@ import {
   BsArrowRight,
   BsThreeDotsVertical,
   BsDot,
-  BsMusicNoteBeamed
+  BsMusicNoteBeamed,
+  BsVolumeMute,
+  BsMusicNoteList 
 } from 'react-icons/bs'
 import { CiSettings, CiShuffle } from 'react-icons/ci'
 import { FaSort } from "react-icons/fa";
 import { FaRegHeart } from 'react-icons/fa6'
-import { MdSkipPrevious, MdSkipNext } from 'react-icons/md'
+import { MdSkipPrevious, MdSkipNext, MdOutlineKeyboardArrowRight  } from 'react-icons/md'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { IoMdHeartEmpty } from "react-icons/io";
@@ -23,7 +25,9 @@ import {
   IoPlayCircleOutline,
   IoPauseCircleOutline,
   IoPlay,
-  IoPauseOutline 
+  IoPauseOutline,
+  IoVolumeMediumOutline,
+
 } from 'react-icons/io5'
 
 const icons = {
@@ -38,12 +42,15 @@ const icons = {
   BsThreeDotsVertical,
   BsDot,
   BsMusicNoteBeamed,
+  BsVolumeMute,
+  BsMusicNoteList,
   CiSettings,
   CiShuffle,
   FaSort,
   FaRegHeart,
   MdSkipPrevious,
   MdSkipNext,
+  MdOutlineKeyboardArrowRight,
   GoChevronLeft,
   GoChevronRight,
   HiOutlineDotsHorizontal,
@@ -53,7 +60,8 @@ const icons = {
   IoPlayCircleOutline,
   IoPauseCircleOutline,
   IoPlay,
-  IoPauseOutline
+  IoPauseOutline,
+  IoVolumeMediumOutline
 }
 
 export default icons

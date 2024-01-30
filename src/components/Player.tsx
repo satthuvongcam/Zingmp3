@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useRef, useState } from 'react'
+import { MouseEvent, useEffect, useRef, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '~/redux/hooks'
 import {
   selectIsPlaying,
@@ -17,15 +17,24 @@ import dayjs from 'dayjs'
 const {
   FaRegHeart,
   BsThreeDotsVertical,
+  BsVolumeMute,
+  BsMusicNoteList,
   CiShuffle,
   MdSkipPrevious,
   MdSkipNext,
   IoPlayCircleOutline,
   IoPauseCircleOutline,
-  IoRepeat
+  IoRepeat,
+  IoVolumeMediumOutline
 } = icons
 
-const Player = () => {
+interface Props {
+  setIsShowSideBarRight: any
+}
+
+const Player = (props: Props) => {
+  const {setIsShowSideBarRight} = props
+
   const isPlaying = useAppSelector(selectIsPlaying)
   const currentSongId = useAppSelector(selectCurrentSong)
   const isAlbum = useAppSelector(selectIsAlbum)
@@ -37,7 +46,10 @@ const Player = () => {
   const [indexSong, setIndexSong] = useState<number>(
     playlist.findIndex((item) => item.encodeId === currentSongId)
   )
-  console.log('current time song: ', currentTimeSong)
+  const [isShuffle, setIsShuffle] = useState<boolean>(false)
+  const [volume, setVolume] = useState<number>(100)
+  const [curVolume, setCurVolume] = useState<number>(100)
+  const [isActiveButton, setIsActiveButton] = useState<boolean>(false)
 
   const trackRef = useRef<HTMLDivElement>(null)
   const thumbReb = useRef<HTMLDivElement>(null)
@@ -87,19 +99,27 @@ const Player = () => {
         const index = playlist.findIndex((item) => item.encodeId === currentSongId)
         setIndexSong(index)
         if (audio.ended) {
-          if (index < playlist.length - 1) {
-            dispatch(setPlay(false))
-            setIndexSong((prev) => prev + 1)
-            dispatch(setCurrentSongId(playlist[indexSong + 1].encodeId))
-            dispatch(setPlay(true))
+          if (isShuffle === false) {
+            if (index < playlist.length - 1) {
+              dispatch(setPlay(false))
+              setIndexSong((prev) => prev + 1)
+              dispatch(setCurrentSongId(playlist[indexSong + 1].encodeId))
+              dispatch(setPlay(true))
+            } else {
+              dispatch(setPlay(false))
+            }
           } else {
-            dispatch(setPlay(false))
+            handleShuffle()
           }
         }
       }, 200)
       setIntervalId(intervalid)
     }
-  }, [audio, isPlaying])
+  }, [audio, isPlaying, isShuffle])
+
+  useEffect(() => {
+    audio.volume = volume / 100
+  }, [volume])
 
   const handleTogglePlayMusic = async () => {
     if (isPlaying) {
@@ -143,6 +163,24 @@ const Player = () => {
     }
   }
 
+  const handleShuffle = () => {
+    setIsShuffle((prev) => !prev)
+    if (isShuffle) {
+      const randomIndex = Math.round(Math.random() * playlist.length) - 1
+      dispatch(setCurrentSongId(playlist[randomIndex].encodeId))
+      dispatch(setPlay(true))
+    }
+  }
+
+  const handleChangeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target) {
+      if (+e.target.value > 0) {
+        setCurVolume(+e.target.value)
+      }
+      setVolume(+e.target.value)
+    }
+  }
+
   return (
     <div className='bg-[#c0d8d8] h-full px-5 flex z-50'>
       <div className='w-[30%] flex-auto flex gap-3 items-center group'>
@@ -166,7 +204,11 @@ const Player = () => {
       </div>
       <div className='w-[40%] flex-auto flex items-center justify-center flex-col py-2'>
         <div className='flex items-center justify-center gap-6'>
-          <button className='cursor-pointer' title='Bật phát ngẫu nhiên'>
+          <button
+            onClick={handleShuffle}
+            className={`cursor-pointer ${isShuffle ? 'text-[#0F7070]' : 'text-black'}`}
+            title={`${isShuffle ? 'Tắt phát ngẫu nhiên' : 'Bật phát ngẫu nhiên'}`}
+          >
             <CiShuffle size={24} />
           </button>
           <button
@@ -216,7 +258,39 @@ const Player = () => {
           <span>{dayjs.unix(songInfo?.duration).format('mm:ss')}</span>
         </div>
       </div>
-      <div className='w-[30%] flex-auto flex items-center'>Volume</div>
+      <div className='w-[30%] flex-auto flex items-center justify-end'>
+        <div className='flex gap-2 items-center'>
+          <span
+            onClick={() => setVolume((prev) => (prev === 0 ? curVolume : 0))}
+            className='text-gray-600 cursor-pointer'
+          >
+            {volume > 0 ? <IoVolumeMediumOutline size={25} /> : <BsVolumeMute size={25} />}
+          </span>
+          <input
+            type='range'
+            min={0}
+            max={100}
+            value={volume}
+            onChange={handleChangeVolume}
+            className='custom-range w-[60%]'
+          />
+        </div>
+        <div className='w-[1px] h-[33px] mx-2 bg-[#0000000d]'></div>
+        <button
+          title='Danh sách phát'
+          onClick={() => {
+            setIsActiveButton((prev) => !prev)
+            setIsShowSideBarRight((prev: boolean) => !prev)
+          }}
+          className={`${
+            isActiveButton
+              ? 'bg-[#0e8080] text-white opacity-[0.8] hover:opacity-[1]'
+              : 'bg-[#ffffff1a] text-[#32323d]'
+          } rounded h-[30px] px-[5px] border border-solid font-medium text-xs ml-5`}
+        >
+          <BsMusicNoteList size={16} />
+        </button>
+      </div>
     </div>
   )
 }
