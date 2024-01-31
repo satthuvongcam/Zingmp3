@@ -1,4 +1,5 @@
 import { IconType } from 'react-icons'
+import { ItemData } from '~/models/homeInterfaces'
 import { ListItemSong } from '~/models/musicInterfaces'
 import { useAppDispatch, useAppSelector } from '~/redux/hooks'
 import {
@@ -19,13 +20,14 @@ interface Style {
 }
 
 interface Props {
-  Data: ListItemSong
+  Data: ListItemSong | ItemData
   Icon: IconType
   Style: Style
 }
 
 const BgImage = (props: Props) => {
   const { Data, Icon, Style } = props
+  console.log('Data: ', Data);
 
   const isPlaying = useAppSelector(selectIsPlaying)
   const currentSongId = useAppSelector(selectCurrentSong)

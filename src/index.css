@@ -7,10 +7,10 @@
     max-height: calc(100vh - 500px);
   }
   .calc-90 {
-    max-height: calc(100vh - 500px);
+    max-height: calc(100vh - 90px);
   }
   .height-90 {
-    height: calc(100vh - 500px);
+    height: calc(100% - 90px);
   }
 }
 

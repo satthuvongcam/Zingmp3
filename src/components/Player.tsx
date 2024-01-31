@@ -182,7 +182,7 @@ const Player = (props: Props) => {
   }
 
   return (
-    <div className='bg-[#c0d8d8] h-full px-5 flex z-50'>
+    <div className='bg-[#c0d8d8] h-full px-5 flex'>
       <div className='w-[30%] flex-auto flex gap-3 items-center group'>
         <img
           src={songInfo?.thumbnail}

@@ -32,7 +32,7 @@ const Public = () => {
           <div
             className={`h-[70px] flex items-center flex-1 mb-5  ${
               isFixed
-                ? 'fixed z-10 left-[240px] right-[0] bg-[#ced9d9cc] shadow-[0_3px_5px_rgba(0,0,0,.08)]'
+                ? 'fixed z-30 left-[240px] right-[0] bg-[#ced9d9cc] shadow-[0_3px_5px_rgba(0,0,0,.08)]'
                 : ''
             }`}
           >
@@ -41,10 +41,10 @@ const Public = () => {
           <Outlet />
         </div>
         {isShowSideBarRight && (
-          <div className='z-20 fixed w-[330px] h-full right-0 bg-[#ced9d9] bottom-[90px] border-none shadow-sm inset-shadow-md'></div>
+          <div className='z-40 fixed w-[330px] h-full right-0 bg-[#ced9d9] bottom-[90px] border-none shadow-sm inset-shadow-md'></div>
         )}
       </div>
-      <div className='fixed bottom-0 left-0 right-0 h-[90px]'>
+      <div className='fixed bottom-0 left-0 right-0 h-[90px] z-50'>
         <Player setIsShowSideBarRight={setIsShowSideBarRight} />
       </div>
     </div>

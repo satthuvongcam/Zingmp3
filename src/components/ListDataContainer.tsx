@@ -1,20 +1,22 @@
-import React from 'react'
 import { Data } from '~/models/homeInterfaces'
 import icons from '~/utils/icons'
 import ItemHome from './ItemHome'
+import RankingSong from './RankingSong'
 
 interface Props {
   data: Data
   isShowAll: boolean
+  numberOfItem?: number
+  isRanking: boolean
 }
 
 const { MdOutlineKeyboardArrowRight } = icons
 
 const ListDataContainer = (props: Props) => {
-  const { data, isShowAll } = props
+  const { data, isShowAll, numberOfItem, isRanking } = props
 
   return (
-    <div className='mt-12 px-[59px] pb-[500px]'>
+    <div className='mt-12 h-full px-[59px]'>
       <div className='flex items-center justify-between'>
         <h2 className='mb-5 text-xl font-bold'>{data?.title}</h2>
         {isShowAll && (
@@ -24,10 +26,16 @@ const ListDataContainer = (props: Props) => {
           </div>
         )}
       </div>
-      <div className='flex items-center justify-between'>
+      <div className='flex justify-between'>
         {data?.items?.map((item, index) => {
-          if (index < 5) {
-            return <ItemHome title={data.title} data={item} key={item?.encodeId} />
+          if (isRanking) {
+            return <RankingSong data={item} index={index} length={data?.items.length - 1} />
+          } else {
+            if (numberOfItem) {
+              if (index < numberOfItem) {
+                return <ItemHome title={data.title} data={item} key={item?.encodeId} />
+              }
+            }
           }
         })}
       </div>

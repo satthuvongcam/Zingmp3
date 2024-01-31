@@ -9,7 +9,7 @@ const ListRelease = () => {
   const [type, setType] = useState<string>('all')
 
   return (
-    <div className='px-[59px] mt-12'>
+    <div className='px-[59px] mt-12 mb-12'>
       <h1 className='text-xl font-semibold mb-5'>Mới phát hành</h1>
       <div className='flex items-center justify-between text-xs mb-4'>
         <div className='flex items-center gap-4'>

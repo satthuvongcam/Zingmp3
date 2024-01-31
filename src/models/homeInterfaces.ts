@@ -29,9 +29,11 @@ export interface ItemData {
   thumbnailM: string
   link: string
   thumbnail: string
+  sortDescription: string
 }
 
 export interface Data {
   items: ItemData[]
   title: string
+  link: string
 }

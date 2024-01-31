@@ -18,7 +18,7 @@ import { FaRegHeart } from 'react-icons/fa6'
 import { MdSkipPrevious, MdSkipNext, MdOutlineKeyboardArrowRight  } from 'react-icons/md'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import {
   IoTrendingUpSharp,
   IoRepeat,
@@ -55,6 +55,7 @@ const icons = {
   GoChevronRight,
   HiOutlineDotsHorizontal,
   IoMdHeartEmpty,
+  IoMdHeart,
   IoTrendingUpSharp,
   IoRepeat,
   IoPlayCircleOutline,

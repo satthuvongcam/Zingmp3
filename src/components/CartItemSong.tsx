@@ -38,9 +38,6 @@ const CartItemSong: React.FC<props> = ({ songRelease }) => {
   // Tính số ngày chênh lệch
   const daysDiff = today - releaseDate
 
-  const ref = useRef<HTMLSpanElement>(null)
-  console.log()
-
   return (
     <div
       className={`flex px-[10px] py-[10px] ${
@@ -68,7 +65,6 @@ const CartItemSong: React.FC<props> = ({ songRelease }) => {
                     content={<ArtistToolTip playlistId={playlistIdHover} artist={artist} />}
                   >
                     <span
-                      ref={ref}
                       onMouseEnter={() => {
                         if (artist?.playlistId) {
                           setPlaylistIdHover(artist?.playlistId)
@@ -79,9 +75,10 @@ const CartItemSong: React.FC<props> = ({ songRelease }) => {
                       }}
                       className='cursor-pointer hover:text-[#0e8080] hover:underline'
                     >
-                      {artist.name}
+                      {index === songRelease?.artists?.length - 1
+                        ? artist?.name
+                        : `${artist?.name},`}
                     </span>
-                    {index === songRelease?.artists?.length - 1 ? '' : ', '}
                   </Tooltip>
                 </Flowbite>
               </div>

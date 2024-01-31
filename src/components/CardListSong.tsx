@@ -22,9 +22,9 @@ const CardListSong: React.FC<props> = ({ type, page, pageSize }) => {
       if (type === 'all') {
         setData(dataAll.slice((page - 1) * pageSize, page * pageSize))
       } else if (type === 'vPop') {
-        setData(dataVPop.slice(page * pageSize, page * pageSize))
+        setData(dataVPop.slice((page - 1) * pageSize, page * pageSize))
       } else {
-        setData(dataOthers.slice(page * pageSize, page * pageSize))
+        setData(dataOthers.slice((page - 1) * pageSize, page * pageSize))
       }
     }
     handleFetchData()

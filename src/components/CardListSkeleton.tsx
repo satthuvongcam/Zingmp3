@@ -2,7 +2,7 @@ import CardItemSkeleton from './CardItemSkeleton'
 
 const CardListSkeleton = () => {
   return (
-    <div className='absolute w-[348px] h-auto top-0 right-[10px] skeleton bg-[#e0ebeb]'>
+    <div className='absolute w-[348px] z-10 h-auto top-0 right-[10px] skeleton bg-[#e0ebeb]'>
       <div className='h-20 px-4 py-4 w-full flex items-center justify-between'>
         <div className='flex items-center gap-2'>
           <div className='w-12 h-12 rounded-full bg-[#c3d0cf] animate-pulse'></div>
