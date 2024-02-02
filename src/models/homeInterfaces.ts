@@ -30,6 +30,7 @@ export interface ItemData {
   link: string
   thumbnail: string
   sortDescription: string
+  releaseDate: number
 }
 
 export interface Data {

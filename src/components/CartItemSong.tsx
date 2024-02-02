@@ -86,7 +86,11 @@ const CartItemSong: React.FC<props> = ({ songRelease }) => {
           })}
         </div>
         <div className='mt-[3px] text-xs text-[#696969]'>
-          {daysDiff === 0 ? 'Hôm nay' : daysDiff === 1 ? 'Hôm qua' : `${daysDiff} ngày trước`}
+          {daysDiff === 0
+            ? 'Hôm nay'
+            : daysDiff === 1
+            ? 'Hôm qua'
+            : `${daysDiff < 0 ? daysDiff * -1 : daysDiff} ngày trước`}
         </div>
       </div>
     </div>

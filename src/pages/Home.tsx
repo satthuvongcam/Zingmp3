@@ -12,7 +12,7 @@ const Home = () => {
   const [springDataHome, setSpringDataHome] = useState<Data>({} as Data)
   const [remixDataHome, setRemixDataHome] = useState<Data>({} as Data)
   const [chillDataHome, setChillDataHome] = useState<Data>({} as Data)
-  const [moodDataHome, setMoodDataHome] = useState<Data>({} as Data)
+  // const [moodDataHome, setMoodDataHome] = useState<Data>({} as Data)
   const [rankingNewSongDataHome, setRankingNewSongDataHome] = useState<Data>({} as Data)
 
   const dispatch = useAppDispatch()
@@ -28,15 +28,17 @@ const Home = () => {
         const springData = data.find((item: ListItemHome) => item.sectionId === 'hSeasonTheme')
         const remixData = data.find((item: ListItemHome) => item.sectionId === 'hEditorTheme3')
         const chillData = data.find((item: ListItemHome) => item.sectionId === 'hEditorTheme')
-        const moodData = data.find((item: ListItemHome) => item.sectionId === 'hEditorTheme4')
-        const rankingNewSongData = data.find((item: ListItemHome) => item.sectionId === 'hNewrelease')
+        // const moodData = data.find((item: ListItemHome) => item.sectionId === 'hEditorTheme4')
+        const rankingNewSongData = data.find(
+          (item: ListItemHome) => item.sectionId === 'hNewrelease'
+        )
         dispatch(getHome(data))
         dispatch(getBanner(bannerData.items))
         dispatch(getSongRelease(releaseData.items))
         setSpringDataHome(springData)
         setRemixDataHome(remixData)
         setChillDataHome(chillData)
-        setMoodDataHome(moodData)
+        // setMoodDataHome(moodData)
         setRankingNewSongDataHome(rankingNewSongData)
       } catch (error) {
         console.log('Error: ', error)
@@ -46,13 +48,18 @@ const Home = () => {
   }, [])
 
   return (
-    <div className='w-full bg-[#CED9D9] pb-[150px]'>
+    <div className='w-full h-full bg-[#CED9D9]'>
       <Slider />
       <ListRelease />
-      <ListDataContainer data={springDataHome} isShowAll={false} numberOfItem={5} isRanking={false} />
+      <ListDataContainer
+        data={springDataHome}
+        isShowAll={false}
+        numberOfItem={5}
+        isRanking={false}
+      />
       <ListDataContainer data={remixDataHome} isShowAll={true} numberOfItem={5} isRanking={false} />
       <ListDataContainer data={chillDataHome} isShowAll={true} numberOfItem={5} isRanking={false} />
-      <ListDataContainer data={moodDataHome} isShowAll={true} numberOfItem={5} isRanking={false} />
+      {/* <ListDataContainer data={moodDataHome} isShowAll={true} numberOfItem={5} isRanking={false} /> */}
       <ListDataContainer data={rankingNewSongDataHome} isShowAll={true} isRanking={true} />
     </div>
   )

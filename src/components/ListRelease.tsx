@@ -16,6 +16,7 @@ const ListRelease = () => {
           {tabs.map((tab) => (
             <button
               onClick={() => setType(tab)}
+              key={tab}
               className={`px-6 py-1 rounded-full border border-solid ${
                 type === tab
                   ? 'border-[#0e8080] bg-[#0e8080] text-white opacity-[0.8] hover:opacity-[1]'

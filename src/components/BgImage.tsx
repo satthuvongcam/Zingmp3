@@ -27,7 +27,6 @@ interface Props {
 
 const BgImage = (props: Props) => {
   const { Data, Icon, Style } = props
-  console.log('Data: ', Data);
 
   const isPlaying = useAppSelector(selectIsPlaying)
   const currentSongId = useAppSelector(selectCurrentSong)
@@ -62,7 +61,7 @@ const BgImage = (props: Props) => {
             isPlaying && currentSongId === Data?.encodeId ? 'visible' : 'invisible'
           } group-hover:visible z-10 cursor-pointer absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-white hover:opacity-0.8`}
         >
-          {isPlaying && currentSongId === Data?.encodeId ? (
+          {isPlaying ? (
             <span
               className={`bg-cover flex items-center justify-center ${
                 Style.isCircle &&
@@ -74,7 +73,7 @@ const BgImage = (props: Props) => {
               ></span>
             </span>
           ) : (
-            <Icon size={Style.iconSize} />
+              <Icon size={Style.iconSize} />
           )}
         </span>
       ) : (
@@ -82,7 +81,7 @@ const BgImage = (props: Props) => {
           onClick={() => {
             if (Data?.encodeId !== currentSongId) {
               dispatch(setPlay(true))
-              dispatch(setCurrentSongId(Data?.encodeId))
+              dispatch(setCurrentSongId(Data?.encodeId))  
             } else {
               dispatch(setPlay(!isPlaying))
             }

@@ -104,7 +104,7 @@ const Album = () => {
               <span>Cập nhật: </span>
               <span>{dayjs.unix(playlistData?.contentLastUpdate).format('DD/MM/YYYY')}</span>
             </span>
-            <span className='flex gap-1 flex-wrap items-center text-[#696969] text-xs'>
+            <span className='flex gap-1 flex-wrap items-center justify-center text-[#696969] text-xs'>
               {playlistData?.artists?.map((item, index) => {
                 return (
                   <Flowbite key={item.id} theme={{ theme: customTooltip }}>

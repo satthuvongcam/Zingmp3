@@ -4,11 +4,14 @@ import icons from '~/utils/icons'
 import BgImage from './BgImage'
 import { CustomFlowbiteTheme, Flowbite, Tooltip } from 'flowbite-react'
 import ArtistToolTip from './ArtistToolTip'
+import dayjs from 'dayjs'
+import { Artists } from '~/models/musicInterfaces'
 
 interface Props {
   data: ItemData
   index: number
-  length: number
+  arrShow: number[]
+  setArrShow: any
 }
 
 const { IoPlay } = icons
@@ -26,39 +29,42 @@ const customTooltip: CustomFlowbiteTheme = {
 
 const RankingSong = (props: Props) => {
   const [playlistIdHover, setPlaylistIdHover] = useState<string>('')
-  const [arrShow, setArrShow] = useState<number[]>([0, 1, 2])
+  const { data, index, arrShow, setArrShow } = props
 
-  const { data, index, length } = props
-  console.log('data: ', data)
-
-  const containerRef = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const invalidId = setInterval(() => {
-      const newArr = arrShow.map((item) => {
-        if (item >= length) {
-          item = 0
-        } else {
-          item += 3
+      const slides = document.querySelectorAll('slide')
+      let newArr = arrShow.map((item) => item + 3)
+      if (newArr.every((item) => item > 8)) {
+        // Reset the array if all elements are greater than to 8
+        newArr = [0, 1, 2]
+      }
+      slides.forEach((slide, index) => {
+        if (index === arrShow[0]) {
+          slide.classList.add('animate-slide-left', 'order-last', 'z-10')
+        } else if (index === arrShow[1]) {
+          slide.classList.add('animate-slide-left2', 'order-2', 'z-15')
+        } else if (index === arrShow[2]) {
+          slide.classList.add('animate-slide-left3', 'order-first', 'z-20')
         }
-        return item
       })
       setArrShow(newArr)
-      // arrShow.includes(index)
-    }, 5000)
+    }, 10000)
     return () => {
       invalidId && clearInterval(invalidId)
     }
-  }, [...arrShow])
+  }, [arrShow, index])
 
   return (
     <div
-      ref={containerRef}
+      ref={ref}
       className={`${
-        index === length ? 'block' : 'hidden'
-      } flex gap-2 h-[150px] rounded w-[32%] px-[15px] py-[15px] bg-[#ffffff4c]  group cursor-pointer`}
+        arrShow.includes(index) ? 'block' : 'hidden'
+      } flex slide gap-2 h-[150px] rounded w-[32%] px-[15px] py-[15px] bg-[#ffffff4c] cursor-pointer`}
     >
-      <div className='w-[120px] h-[120px] cursor-pointer rounded-lg overflow-hidden relative'>
+      <div className='w-[120px] h-[120px] cursor-pointer rounded-lg overflow-hidden relative group'>
         <BgImage
           Data={data}
           Icon={IoPlay}
@@ -73,33 +79,45 @@ const RankingSong = (props: Props) => {
           }}
         />
       </div>
-      <div>
-        <div className='text-sm text-[#32323d] font-medium'>{data?.title}</div>
-        <div className='w-full flex items-center flex-wrap gap-1 text-xs text-[#696969] mt-[3px]'>
-          {data?.artists?.map((artist, index) => (
-            <div key={artist.id} className='flex'>
-              <Flowbite theme={{ theme: customTooltip }}>
-                <Tooltip
-                  style='light'
-                  content={<ArtistToolTip playlistId={playlistIdHover} artist={artist} />}
-                >
-                  <span
-                    onMouseEnter={() => {
-                      if (artist?.playlistId) {
-                        setPlaylistIdHover(artist?.playlistId)
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      setPlaylistIdHover('')
-                    }}
-                    className='hover:text-[#0e8080] hover:underline'
-                  >
-                    {index === data?.artists?.length - 1 ? artist?.name : `${artist?.name},`}
-                  </span>
-                </Tooltip>
-              </Flowbite>
-            </div>
-          ))}
+      <div className='flex flex-col justify-between flex-1'>
+        <div>
+          <div className='text-sm text-[#32323d] font-medium'>{data?.title}</div>
+          <div className='w-full flex items-center flex-wrap gap-1 text-xs text-[#696969] mt-[3px]'>
+            {data?.artists?.map((artist, index) => {
+              return (
+                <div key={artist.id} className='flex'>
+                  <Flowbite theme={{ theme: customTooltip }}>
+                    <Tooltip
+                      style='light'
+                      content={<ArtistToolTip playlistId={playlistIdHover} artist={artist} />}
+                    >
+                      <span
+                        onMouseEnter={() => {
+                          if (artist?.playlistId) {
+                            setPlaylistIdHover(artist?.playlistId)
+                          }
+                        }}
+                        onMouseLeave={() => {
+                          setPlaylistIdHover('')
+                        }}
+                        className='hover:text-[#0e8080] hover:underline'
+                      >
+                        {index === data?.artists?.length - 1 ? artist?.name : `${artist?.name},`}
+                      </span>
+                    </Tooltip>
+                  </Flowbite>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        <div className='flex items-end justify-between'>
+          <span className='opacity-[0.4] text-stroke-1 text-[40px] font-black text-transparent font-custom'>
+            #{index + 1}
+          </span>
+          <div className='text-[#696969] text-sm'>
+            {dayjs.unix(data?.releaseDate).format('DD.MM.YYYY')}
+          </div>
         </div>
       </div>
     </div>

@@ -64,39 +64,21 @@ const ArtistToolTip = (props: Props) => {
                     alt='Avatar Artist'
                     className='w-full h-full rounded-full object-cover cursor-pointer'
                   ></img>
-                  {/* {isPlaying ? ( */}
                   <span
                     className={`invisible group-hover:visible z-20 cursor-pointer absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-white hover:opacity-0.8`}
                   >
-                    {/* {isPlaying ? (
-                        <span
-                          className={`bg-cover flex items-center justify-center w-[50px] h-[50px] border-2 border-white rounded-full`}
-                        >
-                          <span
-                            className={`bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif')] w-9 h-9`}
-                          ></span>
-                        </span>
-                      ) : ( */}
                     <IoPlay size={20} />
-                    {/* )}
-                    </span>
-                  ) : (
-                    <span
-                      className={`${
-                        isBlockBgImage ? 'visible' : 'invisible'
-                      } group-hover:visible cursor-pointer z-20 absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-white hover:opacity-0.8`}
-                    >
-                      <IoPlay size={20} /> */}
                   </span>
-                  {/* )} */}
                 </div>
                 <div>
                   <div className='text-sm text-[#32323D] font-semibold cursor-pointer hover:text-[#0F7070]'>
                     {artist?.name}
                   </div>
-                  {artist?.totalFollow ? (
+                  {artistData?.artists[0]?.totalFollow ? (
                     <div className='text-xs text-[#696969] mt-[2px]'>
-                      {`${Math.round(artist?.totalFollow / 1000)}K quan tâm`}
+                      {artistData?.artists[0].totalFollow < 1000
+                        ? `${artistData?.artists[0].totalFollow} người follow`
+                        : `${Math.round(artistData?.artists[0]?.totalFollow / 1000)}K quan tâm`}
                     </div>
                   ) : (
                     <></>

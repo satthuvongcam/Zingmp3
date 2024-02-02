@@ -54,5 +54,6 @@
   background-position-x: -50%;
 }
 
-.custom-range {
+.text-stroke-1 {
+  -webkit-text-stroke: 1px #6b3483;
 }
