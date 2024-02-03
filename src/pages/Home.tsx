@@ -21,7 +21,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await homeApi.getHome()
-        const data = response.data.data.items
+        const data = response.items
         console.log('data: ', data)
         const bannerData = data.find((item: ListItemHome) => item.sectionType === 'banner')
         const releaseData = data.find((item: ListItemHome) => item.sectionType === 'new-release')

@@ -57,6 +57,8 @@ export interface ListItemSong {
   total: number
   totalDuration: number
   releaseDate: number
+  name?: string
+  totalFollow?: number
 }
 
 export interface Album {

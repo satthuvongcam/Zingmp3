@@ -4,7 +4,7 @@
 
 @layer utilities {
   .calc-500 {
-    max-height: calc(100vh - 500px);
+    max-height: calc(100vh - 300px);
   }
   .calc-90 {
     max-height: calc(100vh - 90px);
